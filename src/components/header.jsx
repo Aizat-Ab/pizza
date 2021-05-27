@@ -14,7 +14,7 @@ const Header = () => {
             <img width="38" src={pizzaLogo} alt="Pizza logo"/>
             <div>
               <h1>React Pizza</h1>
-              <p>самая вкусная пицца во вселенной</p>
+              <p>самая вкусная пицца во вселенной!</p>
             </div>
           </Link>
           <Link to="/cart" className="header__cart">
