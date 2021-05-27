@@ -1,17 +1,15 @@
 import { createStore, applyMiddleware, combineReducers } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import thunk from 'redux-thunk';
-import filter from './reducers/filter'
+import filter from './reducers/filter';
+import cart from './reducers/cart';
 
 
 const allReaducers = combineReducers({
-    filter
+    filter,
+    cart
 })
 const store = createStore(allReaducers, composeWithDevTools(applyMiddleware(thunk)));
-
-// store.subscribe(()=> console.log(store.getState()));
-
-// window.store = store;
 
 export default store; 
 

@@ -11,8 +11,8 @@ const Home = () => {
   const category = useSelector((state) => state.filter.category) 
 
   React.useEffect(async()=>{
-    const responce = await axios.get('http://localhost:3000/db.json');
-    setPizzas(responce.data.pizzas);
+    const responce = await axios.get('http://localhost:3005/pizzas');
+    setPizzas(responce.data);
   },[]);
 
     return (
