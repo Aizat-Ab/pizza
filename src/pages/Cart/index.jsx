@@ -34,10 +34,11 @@ const Cart = () => {
               </div>
             </div>
             <div className="content__items">
-              {addedMovies.map((item)=>{
-                  return (<CartItems {...item}
-                  totalCount={items[item.id].items.length}
-                  totalPrice={items[item.id].totalPrice}
+              {addedMovies.map((pizza)=>{
+                console.log(items)
+                  return (<CartItems {...pizza}
+                  totalCount={items[pizza.id].items.length}
+                  totalPrice={items[pizza.id].totalPrice}
                   />)
                 })}
             </div>

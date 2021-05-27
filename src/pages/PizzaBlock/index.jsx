@@ -1,9 +1,10 @@
 import React from 'react';
 import classNames from 'classnames';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { cartAdd } from '../../redux/actions/filter';
+import { pizzaCount } from '../../redux/actions/pizzas';
 
-const PizzaBlock = ({pizza}) => {
+const PizzaBlock = ({pizza, countPizza}) => {
     const pizzaTypes = ['тонкое', 'традиционное'];
     const pizzaSizes = [ 26, 30, 40];
     const [activeType, setActiveType] = React.useState(0);
@@ -31,6 +32,7 @@ const PizzaBlock = ({pizza}) => {
     });
 
     const addToCart = () => {
+      dispatch(pizzaCount(pizza.id))
       dispatch(cartAdd(pizzaItem))
     }
 
@@ -77,8 +79,8 @@ const PizzaBlock = ({pizza}) => {
           fill="white"
         />
       </svg>
-      <span>Добавить</span>
-      <i>2</i>
+      <span >Добавить</span>
+      <i>{countPizza}</i>
     </button>
   </div>
 </div>
