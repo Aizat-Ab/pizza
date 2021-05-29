@@ -3,7 +3,7 @@ import Categories from '../Categories';
 import PizzaBlock from '../PizzaBlock';
 import Sort from '../Sort';
 import axios from 'axios';
-import { useSelector,useDispatch  } from 'react-redux';
+import { useSelector, useDispatch  } from 'react-redux';
 import { fetchPizzas, setPizzas } from '../../redux/actions/pizzas';
 
 const Home = () => {
@@ -37,7 +37,7 @@ const Home = () => {
             })
              .map((pizza)=>{
                return <PizzaBlock 
-               countPizza={countPizza[pizza.id] !== undefined ?countPizza[pizza.id].count : 0}
+               countPizza={countPizza[pizza.id] !== undefined ? countPizza[pizza.id].count : 0}
                pizza={pizza} 
                key={pizza.id}/>
              })}

@@ -25,8 +25,34 @@ const initialState = {
             items: newCounter,
           };
         }
+        case 'DROP__COUNTER' : {
+          return {
+              ...state, 
+              items : {},
+              }
+          }
+        case 'REMOVE__COUNTER' : {
+          const counters = {...state.items};
+          delete counters[action.payload]
+            return {
+                ...state, 
+                items : counters,
+                }
+            }
+        case 'PIZZA__SIZES' : {
+              
+              return {
+                    ...state,
+                    items : {
+                      ...state.items,
+                      [action.payload.id] : {
+                        count: action.payload.count,
+                        size: action.payload.size,
+                      }
+                    },
+                  }
+                }  
           
-
       default:
         return state;
     }

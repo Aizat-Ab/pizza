@@ -1,8 +1,8 @@
 import React from 'react';
 import classNames from 'classnames';
 import { useDispatch, useSelector } from 'react-redux';
-import { cartAdd } from '../../redux/actions/filter';
-import { pizzaCount } from '../../redux/actions/pizzas';
+import { cartAdd } from '../../redux/actions/cart';
+import { pizzaCount, pizzaTypesAction, pizzaSizesAction } from '../../redux/actions/pizzas';
 
 const PizzaBlock = ({pizza, countPizza}) => {
     const pizzaTypes = ['тонкое', 'традиционное'];
@@ -15,9 +15,14 @@ const PizzaBlock = ({pizza, countPizza}) => {
 
     const onSelectType = (index) => {
         setActiveType(index);
+        dispatch(pizzaTypesAction())
     }
     const onSelectSize = (index) => {
         setActiveSize(index);
+        dispatch(pizzaSizesAction({
+          id: pizza.id,
+          sizes: sizes[index]
+        }))
     }
 
     const [pizzaItem, setPizzaItem] = React.useState({

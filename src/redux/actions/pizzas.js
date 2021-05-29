@@ -14,5 +14,23 @@ export const setPizzas = (items) => ({
 export const pizzaCount = (id) => ({
     type :  'INCREMENT__COUNT',
     payload: id,
-})
+});
 
+export const dropCount = () => ({
+    type :  'DROP__COUNTER'
+});
+
+export const removeCounter = (id) => ({
+    type :  'REMOVE__COUNTER',
+    payload: id,
+});
+
+export const pizzaSizesAction = (size) => ({
+    type :  'PIZZA__SIZES',
+    payload: size,
+});
+
+export const pizzaTypesAction = (type) => ({
+    type :  'PIZZA__TYPES',
+    payload: type,
+});
