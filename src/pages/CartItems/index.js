@@ -5,12 +5,16 @@ import { plusCart } from '../../redux/actions/cart';
 import { minusCart} from '../../redux/actions/cart';
 import { removeCart } from '../../redux/actions/cart';
 import { removeCounter } from '../../redux/actions/pizzas';
+import { useSelector } from 'react-redux';
 
+const CartItems = ({id, name, sizes, imageUrl, totalPrice, totalCount}) => {
 
-const CartItems = ({id, name, size, imageUrl, types, totalPrice, totalCount}) => {
-
+  const types = ['тонкое', 'традиционное']
   // const a =[id, name, size, imageUrl, types, totalPrice, totalCount]
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
+
+  const activeSize = useSelector((state) => state.pizzas.items);
+  const activeType = useSelector((state) => state.pizzas.items)
 
   const hadlePlusCart = () => {
     dispatch(plusCart(id))
@@ -33,7 +37,7 @@ const CartItems = ({id, name, size, imageUrl, types, totalPrice, totalCount}) =>
   </div>
   <div className="cart__item-info">
     <h3>{name}</h3>
-    <p>{types}, {size}</p>
+    <p>{types[activeType[id].type ? activeType[id].type : 0]} тесто, {sizes[activeSize[id].size]} см.</p>
   </div>
   <div className="cart__item-count">
     <div onClick={hadleMinusCart} className="button button--outline button--circle cart__item-count-minus">

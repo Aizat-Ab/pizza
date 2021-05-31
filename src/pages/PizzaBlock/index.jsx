@@ -7,6 +7,7 @@ import { pizzaCount, pizzaTypesAction, pizzaSizesAction } from '../../redux/acti
 const PizzaBlock = ({pizza, countPizza}) => {
     const pizzaTypes = ['тонкое', 'традиционное'];
     const pizzaSizes = [ 26, 30, 40];
+
     const [activeType, setActiveType] = React.useState(0);
     const [activeSize, setActiveSize] = React.useState(0);
     const dispatch = useDispatch()
@@ -15,15 +16,26 @@ const PizzaBlock = ({pizza, countPizza}) => {
 
     const onSelectType = (index) => {
         setActiveType(index);
-        dispatch(pizzaTypesAction())
+        dispatch(pizzaTypesAction({
+          type: index,
+          id: pizza.id,
+          count: countPizza,
+        }))
     }
     const onSelectSize = (index) => {
         setActiveSize(index);
         dispatch(pizzaSizesAction({
+          type: index,
           id: pizza.id,
-          sizes: sizes[index]
-        }))
+          sizes: index,
+          count: countPizza
+        }),
+        )
+        setActiveSize(index);
     }
+
+    const selectedSize = useSelector((state) => state.pizzas.items);
+    const selectedType = useSelector((state) => state.pizzas.items)
 
     const [pizzaItem, setPizzaItem] = React.useState({
       id: pizza.id,
@@ -35,6 +47,14 @@ const PizzaBlock = ({pizza, countPizza}) => {
       category: pizza.category,
       rating: pizza.rating,
     });
+
+    React.useEffect(()=> {
+      if (selectedSize[pizza.id] !== undefined){
+        setPizzaItem((prev)=>({...prev, price:pizza.price[selectedSize[pizza.id]]}));
+        setActiveSize(selectedSize[pizza.id].size);
+        setActiveType(types[selectedType[pizza.id].type ? selectedType[pizza.id].type : 0]);
+      }
+    },[])
 
     const addToCart = () => {
       dispatch(pizzaCount(pizza.id))

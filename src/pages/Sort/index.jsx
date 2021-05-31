@@ -5,13 +5,21 @@ const Sort = () => {
 
     const [sortItem, setSortItem] = React.useState(0);
     const [sortPopup, setSortPopup] = React.useState(false);
+    const sortRef = React.useRef();
 
+    const handleOutSide = (event) => {
+      if (!event.path.includes(sortRef.current)){
+        setSortPopup(false)
+      }
+    }
+    React.useEffect(()=>{
+      document.body.addEventListener('click', handleOutSide)}, [])
     const onClick = (index)=>{
         setSortItem(index);
         setSortPopup(false);
     }
     return (
-        <div className="sort">
+        <div ref={sortRef} className="sort">
               <div className="sort__label">
                 <svg
                   className={sortPopup === true ? 'active' : ''}

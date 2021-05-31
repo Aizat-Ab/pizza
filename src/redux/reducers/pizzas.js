@@ -17,6 +17,7 @@ const initialState = {
           const newCounter = {
             ...state.items,
             [action.payload] : {
+              ...state.items[action.payload],
               count : saveCounter,
             }
           }
@@ -40,7 +41,6 @@ const initialState = {
                 }
             }
         case 'PIZZA__SIZES' : {
-              
               return {
                     ...state,
                     items : {
@@ -51,7 +51,20 @@ const initialState = {
                       }
                     },
                   }
-                }  
+                }
+        case 'PIZZA__TYPES' : {
+                  return {
+                        ...state,
+                        items : {
+                          ...state.items,
+                          [action.payload.id] : {
+                          ...state.items[action.payload.id],
+                            count: action.payload.count,
+                            type: action.payload.type,
+                          }
+                        },
+                      }
+                    }
           
       default:
         return state;
