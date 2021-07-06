@@ -1,16 +1,19 @@
-  
-const jsonServer = require('server');
-const server = jsonServer.create();
-const router = jsonServer.router('./public/db.json');
-const middlewares = jsonServer.defaults({
-  static: './build',
-});
+const express = require('express'),
+	morgan = require('morgan'),
+	path = require('path')
 
-const PORT = process.env.PORT || 3005;
+const app = express(),
+	port = 3001
 
-server.use(middlewares);
-server.use(router);
+app.use(morgan('dev'))
+app.use(express.json())
+app.use(express.urlencoded({extended: false}))
+app.use(express.static(path.join(__dirname, 'public')))
 
-server.listen(PORT, () => {
-  console.log('Server is running');
-});
+app.use('/', require('./routes'))
+app.use('/catalog', require('./routes/catalog'))
+app.use('/user', require('./routes/user'))
+
+app.listen(port, () => {
+	console.log('server started on http://localhost:' + port)
+})
