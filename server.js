@@ -3,7 +3,7 @@ const express = require('express'),
 	path = require('path')
 
 const app = express(),
-	port = 3005
+	port = 3001
 
 app.use(morgan('dev'))
 app.use(express.json())
